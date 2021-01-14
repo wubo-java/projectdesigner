@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev  # 激活生产环境
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
