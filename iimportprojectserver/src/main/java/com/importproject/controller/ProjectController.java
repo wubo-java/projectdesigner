@@ -4,6 +4,7 @@ import com.importproject.dto.ProjectDTO;
 import com.importproject.dto.ZMenuDTO;
 import com.importproject.repository.inter.ProjectRepositoryInter;
 import com.importproject.service.inter.ImportprojectServiceInter;
+import com.importproject.service.inter.QueryProjecInfoServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +23,12 @@ public class ProjectController {
 
     @Autowired
     ProjectRepositoryInter projectRepositoryInter;
+
+    @Autowired
+    QueryProjecInfoServiceInter queryProjecInfoServiceInter;
     @RequestMapping("/importProject")
-    public String importProject(String projectroot){
+    public void importProject(String projectroot){
         importprojectServiceInter.importProject(projectroot);
-        return null;
     }
 
 
@@ -38,7 +41,7 @@ public class ProjectController {
     */
     @RequestMapping("/queryProjectPojoInfo")
     public List<ZMenuDTO> queryProjectPojoInfo(String projectid){
-        return null;
+        return queryProjecInfoServiceInter.queryProjectPojoInfo(projectid);
     }
 
     /**
