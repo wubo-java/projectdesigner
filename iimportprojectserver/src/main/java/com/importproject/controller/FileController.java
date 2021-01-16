@@ -1,6 +1,8 @@
 package com.importproject.controller;
 
 import com.importproject.dto.FileDTO;
+import com.importproject.repository.inter.FileRepositoryInter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FileController {
 
+    @Autowired
+    FileRepositoryInter fileRepositoryInter;
     /**
      * @author wubo
      * @description 查询单个文件信息
@@ -22,6 +26,6 @@ public class FileController {
      
     @RequestMapping("/queryFile")
     public FileDTO queryFile(String fileid){
-        return null;
+        return fileRepositoryInter.queryFile(fileid);
     }
 }

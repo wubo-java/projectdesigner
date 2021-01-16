@@ -1,6 +1,8 @@
 package com.importproject.controller;
 
 import com.importproject.dto.DirectoryDTO;
+import com.importproject.repository.inter.DirectoryRepositoryInter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DiretoryController {
 
+    @Autowired
+    DirectoryRepositoryInter directoryRepositoryInter;
     /**
      * @author wubo
      * @description 查询单个文件夹信息
@@ -22,6 +26,6 @@ public class DiretoryController {
      
     @RequestMapping("/queryDirectory")
     public DirectoryDTO queryDirectory(String directoryid){
-        return null;
+        return directoryRepositoryInter.queryDirectory(directoryid);
     }
 }

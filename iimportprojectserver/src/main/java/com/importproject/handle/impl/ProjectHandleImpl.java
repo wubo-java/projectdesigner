@@ -1,7 +1,11 @@
 package com.importproject.handle.impl;
 
+import com.importproject.dto.ZMenuDTO;
 import com.importproject.handle.inter.ProjectHandleinter;
+import com.importproject.pojo.ProjectPojo;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author wubo
@@ -22,6 +26,21 @@ public class ProjectHandleImpl implements ProjectHandleinter {
     public void updateProjectByProjectId(String projectId) {
 
     }
+
+    /**
+     * @author wubo
+     * @description 将数据库对象转换为前端ZTree识别的对象。
+     * @param
+     * @return
+     * @date 2021/1/16
+     */
+
+    @Override
+    public List<ZMenuDTO> copyValue(ProjectPojo projectPojo) {
+      //TODO 将数据库对象转换为ZTree对象。
+      return null;
+    }
+
     /**
      * @author wubo
      * @description 插入工程信息。
@@ -29,7 +48,6 @@ public class ProjectHandleImpl implements ProjectHandleinter {
      * @return
      * @date 2021/1/16
      */
-
     @Override
     public void insertProjectInfo() {
 

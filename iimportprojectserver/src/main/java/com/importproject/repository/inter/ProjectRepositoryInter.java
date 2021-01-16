@@ -13,8 +13,10 @@ import java.util.List;
 public interface ProjectRepositoryInter {
 
 
-    public List<ProjectPojo> queryProjectPojoInfo(String projectid);
+    public ProjectPojo queryProjectPojoInfo(String projectid);
 
 
     public ProjectDTO queryProject(String projectid);
+
+    public List<ProjectDTO> queryAllProject();
 }

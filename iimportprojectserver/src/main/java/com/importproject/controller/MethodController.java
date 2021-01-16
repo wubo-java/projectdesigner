@@ -1,6 +1,8 @@
 package com.importproject.controller;
 
 import com.importproject.dto.MethodDTO;
+import com.importproject.repository.inter.MethodRepoistoryInter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MethodController {
+
+    @Autowired
+    MethodRepoistoryInter methodRepoistoryInter;
     /**
      * @author wubo
      * @description 查询方法信息
@@ -21,6 +26,6 @@ public class MethodController {
      
     @RequestMapping("/queryMethod")
     public MethodDTO queryMethod(String methodid){
-        return null;
+        return methodRepoistoryInter.queryMethod(methodid);
     }
 }

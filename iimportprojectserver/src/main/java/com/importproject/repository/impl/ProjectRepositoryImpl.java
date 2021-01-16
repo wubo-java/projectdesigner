@@ -14,6 +14,20 @@ import java.util.List;
  */
 @Service
 public class ProjectRepositoryImpl implements ProjectRepositoryInter {
+    
+    /**
+     * @author wubo
+     * @description 查询所有项目信息
+     * @param 
+     * @return {@link java.util.List<com.importproject.dto.ProjectDTO>}
+     * @date 2021/1/16
+     */
+     
+    @Override
+    public List<ProjectDTO> queryAllProject() {
+        return null;
+    }
+
     /**
      * @author wubo
      * @description 查询工程信息
@@ -23,7 +37,7 @@ public class ProjectRepositoryImpl implements ProjectRepositoryInter {
      */
 
     @Override
-    public List<ProjectPojo> queryProjectPojoInfo(String projectid) {
+    public ProjectPojo queryProjectPojoInfo(String projectid) {
         return null;
     }
 
