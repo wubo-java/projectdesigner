@@ -31,7 +31,7 @@ public class ProjectController {
     * @return {@link java.util.List<com.importproject.dto.ZMenuDTO>}
     * @date 2021/1/16
     */
-    
+    @RequestMapping("/queryProjectPojoInfo")
     public List<ZMenuDTO> queryProjectPojoInfo(String projectid){
         return null;
     }
@@ -43,6 +43,7 @@ public class ProjectController {
      * @return {@link ProjectDTO}
      * @date 2021/1/16
      */
+    @RequestMapping("/queryProject")
     public ProjectDTO queryProject(String projectid){
         return null;
     }
