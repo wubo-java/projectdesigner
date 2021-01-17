@@ -15,6 +15,6 @@ public interface MethodRepoistoryInter {
     public MethodDTO queryMethod(String methodid);
 
 
-    public List<MethodDTO> queryAllMethod(String fileid);
+    public List<MethodDTO> queryAllMethod();
 
 }

@@ -3,6 +3,8 @@ package com.importproject.dao;
 import com.importproject.enetity.File;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface FileMapper {
     /**
@@ -52,4 +54,6 @@ public interface FileMapper {
      * @mbggenerated Sun Jan 17 10:34:23 CST 2021
      */
     int updateByPrimaryKey(File record);
+
+    List<File> selectAll();
 }

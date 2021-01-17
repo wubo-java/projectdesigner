@@ -1,10 +1,21 @@
 package com.importproject.repository.impl;
 
+import com.importproject.dao.ProjectMapper;
+import com.importproject.dto.DirectoryDTO;
+import com.importproject.dto.FileDTO;
+import com.importproject.dto.MethodDTO;
 import com.importproject.dto.ProjectDTO;
+import com.importproject.enetity.Project;
 import com.importproject.pojo.ProjectPojo;
+import com.importproject.repository.inter.DirectoryRepositoryInter;
+import com.importproject.repository.inter.FileRepositoryInter;
+import com.importproject.repository.inter.MethodRepoistoryInter;
 import com.importproject.repository.inter.ProjectRepositoryInter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +25,19 @@ import java.util.List;
  */
 @Service
 public class ProjectRepositoryImpl implements ProjectRepositoryInter {
-    
+
+    @Autowired
+    ProjectMapper projectMapper;
+
+    @Autowired
+    DirectoryRepositoryInter directoryRepositoryInter;
+
+    @Autowired
+    FileRepositoryInter fileRepositoryInter;
+
+    @Autowired
+    MethodRepoistoryInter methodRepoistoryInter;
+
     /**
      * @author wubo
      * @description 查询所有项目信息
@@ -25,7 +48,14 @@ public class ProjectRepositoryImpl implements ProjectRepositoryInter {
      
     @Override
     public List<ProjectDTO> queryAllProject() {
-        return null;
+        List<Project> projectList=projectMapper.selectAll();
+        List<ProjectDTO> projectDTOList=new ArrayList<>();
+        for (Project project : projectList) {
+            ProjectDTO projectDTO=new ProjectDTO();
+            BeanUtils.copyProperties(project,projectDTO);
+            projectDTOList.add(projectDTO);
+        }
+        return projectDTOList;
     }
 
     /**
@@ -38,7 +68,14 @@ public class ProjectRepositoryImpl implements ProjectRepositoryInter {
 
     @Override
     public ProjectPojo queryProjectPojoInfo(String projectid) {
-        return null;
+        List<DirectoryDTO> directoryDTOList=directoryRepositoryInter.queryAllDirectory();
+        List<FileDTO> fileDTOList=fileRepositoryInter.queryAllFile();
+        List<MethodDTO> methodDTOList=methodRepoistoryInter.queryAllMethod();
+        ProjectPojo projectPojo=new ProjectPojo();
+        projectPojo.setDirectoryDTOList(directoryDTOList);
+        projectPojo.setFileDTOList(fileDTOList);
+        projectPojo.setMethodDTOList(methodDTOList);
+        return projectPojo;
     }
 
     /**
@@ -50,6 +87,9 @@ public class ProjectRepositoryImpl implements ProjectRepositoryInter {
      */
     @Override
     public ProjectDTO queryProject(String projectid) {
-        return null;
+       Project project= projectMapper.selectByPrimaryKey(Integer.parseInt(projectid));
+       ProjectDTO projectDTO=new ProjectDTO();
+       BeanUtils.copyProperties(project,projectDTO);
+        return projectDTO;
     }
 }

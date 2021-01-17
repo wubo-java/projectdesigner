@@ -1,9 +1,14 @@
 package com.importproject.repository.impl;
 
+import com.importproject.dao.FileMapper;
 import com.importproject.dto.FileDTO;
+import com.importproject.enetity.File;
 import com.importproject.repository.inter.FileRepositoryInter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +19,8 @@ import java.util.List;
 @Service
 public class FileRepositoryImpl  implements FileRepositoryInter {
 
+    @Autowired
+    FileMapper fileMapper;
     /**
      * @author wubo
      * @description 根据文件id查询文件信息
@@ -23,7 +30,10 @@ public class FileRepositoryImpl  implements FileRepositoryInter {
      */
     @Override
     public FileDTO queryFile(String fileid) {
-        return null;
+        File file=fileMapper.selectByPrimaryKey(Integer.parseInt(fileid));
+        FileDTO fileDTO=new FileDTO();
+        BeanUtils.copyProperties(file,fileDTO);
+        return fileDTO;
     }
 
     /**
@@ -36,6 +46,13 @@ public class FileRepositoryImpl  implements FileRepositoryInter {
 
     @Override
     public List<FileDTO> queryAllFile() {
-        return null;
+        List<File> fileList=fileMapper.selectAll();
+        List<FileDTO> fileDTOList=new ArrayList<>();
+        for (File file : fileList) {
+            FileDTO fileDTO=new FileDTO();
+            BeanUtils.copyProperties(file,fileDTO);
+            fileDTOList.add(fileDTO);
+        }
+        return fileDTOList;
     }
 }

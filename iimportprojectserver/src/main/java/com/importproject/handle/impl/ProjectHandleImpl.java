@@ -1,8 +1,7 @@
 package com.importproject.handle.impl;
 
 import com.importproject.dao.ProjectMapper;
-import com.importproject.dto.ProjectDTO;
-import com.importproject.dto.ZMenuDTO;
+import com.importproject.dto.*;
 import com.importproject.enetity.Project;
 import com.importproject.handle.inter.ProjectHandleinter;
 import com.importproject.pojo.ProjectPojo;
@@ -10,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +47,23 @@ public class ProjectHandleImpl implements ProjectHandleinter {
 
     @Override
     public List<ZMenuDTO> copyValue(ProjectPojo projectPojo) {
+        List<ZMenuDTO> zMenuDTOList=new ArrayList<>();
       //TODO 将数据库对象转换为ZTree对象。
+        List<DirectoryDTO> directoryDTOList=projectPojo.getDirectoryDTOList();
+        for (DirectoryDTO directoryDTO : directoryDTOList) {
+            ZMenuDTO zMenuDTO=new ZMenuDTO();
+            //TODO 转换文件夹信息入zMenuDTO。
+        }
+        List<FileDTO> fileDTOList=projectPojo.getFileDTOList();
+        for (FileDTO fileDTO : fileDTOList) {
+            ZMenuDTO zMenuDTO=new ZMenuDTO();
+            //TODO 转换文件信息入zMenuDTO。
+        }
+        List<MethodDTO> methodDTOList=projectPojo.getMethodDTOList();
+        for (MethodDTO methodDTO : methodDTOList) {
+            ZMenuDTO zMenuDTO=new ZMenuDTO();
+            //TODO 转换方法信息入zMenuDTO。
+        }
       return null;
     }
 

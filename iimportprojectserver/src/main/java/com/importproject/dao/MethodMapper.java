@@ -3,6 +3,8 @@ package com.importproject.dao;
 import com.importproject.enetity.Method;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface MethodMapper {
     /**
@@ -52,4 +54,6 @@ public interface MethodMapper {
      * @mbggenerated Sun Jan 17 10:34:23 CST 2021
      */
     int updateByPrimaryKey(Method record);
+
+    List<Method> selectAll();
 }

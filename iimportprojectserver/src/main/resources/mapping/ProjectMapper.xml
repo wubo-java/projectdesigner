@@ -19,6 +19,11 @@
     -->
     projectid, projectdesc, projectroot
   </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+   select *from project_t;
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated

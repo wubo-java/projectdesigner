@@ -2,6 +2,7 @@ package com.importproject.pojo;
 
 import com.importproject.dto.DirectoryDTO;
 import com.importproject.dto.FileDTO;
+import com.importproject.dto.MethodDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -15,4 +16,5 @@ import java.util.List;
 public class ProjectPojo {
     private List<FileDTO> fileDTOList;
     private List<DirectoryDTO> directoryDTOList;
+    private List<MethodDTO> methodDTOList;
 }

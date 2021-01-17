@@ -1,9 +1,14 @@
 package com.importproject.repository.impl;
 
+import com.importproject.dao.DirectoryMapper;
 import com.importproject.dto.DirectoryDTO;
+import com.importproject.enetity.Directory;
 import com.importproject.repository.inter.DirectoryRepositoryInter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +19,8 @@ import java.util.List;
 @Service
 public class DirectoryRepositoryImpl implements DirectoryRepositoryInter {
 
+    @Autowired
+    DirectoryMapper directoryMapper;
     /**
      * @author wubo
      * @description 查询项目文件夹信息
@@ -23,7 +30,10 @@ public class DirectoryRepositoryImpl implements DirectoryRepositoryInter {
      */
     @Override
     public DirectoryDTO queryDirectory(String directoryid) {
-        return null;
+        Directory directory=directoryMapper.selectByPrimaryKey(Integer.parseInt(directoryid));
+        DirectoryDTO directoryDTO=new DirectoryDTO();
+        BeanUtils.copyProperties(directory,directoryDTO);
+        return directoryDTO;
     }
 
     /**
@@ -36,6 +46,13 @@ public class DirectoryRepositoryImpl implements DirectoryRepositoryInter {
 
     @Override
     public List<DirectoryDTO> queryAllDirectory() {
-        return null;
+        List<Directory> directoryList=directoryMapper.selectAll();
+        List<DirectoryDTO> directoryDTOList=new ArrayList<>();
+        for (Directory project : directoryList) {
+            DirectoryDTO directoryDTO=new DirectoryDTO();
+            BeanUtils.copyProperties(project,directoryDTO);
+            directoryDTOList.add(directoryDTO);
+        }
+        return directoryDTOList;
     }
 }

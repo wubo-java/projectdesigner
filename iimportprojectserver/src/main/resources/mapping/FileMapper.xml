@@ -25,6 +25,11 @@
     fileid, directoryid, projectid_f, filename, filedesc, method_id_fk, projectroot_f, 
     filetype
   </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+  select *from file_t;
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
