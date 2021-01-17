@@ -1,8 +1,10 @@
 package com.importproject.handle.impl;
 
+import com.importproject.dao.ProjectMapper;
 import com.importproject.dto.ZMenuDTO;
 import com.importproject.handle.inter.ProjectHandleinter;
 import com.importproject.pojo.ProjectPojo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
  */
 @Service
 public class ProjectHandleImpl implements ProjectHandleinter {
+
+    @Autowired
+    ProjectMapper projectMapper;
     /**
      * @author wubo
      * @description 根据工程id更新。
