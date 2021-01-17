@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--  <properties resource="mybatis.properties" />
+         -->
+<!--    <classPathEntry location="该jar包的位置\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />-->
+    <context id="msqlTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/projectdesigner?serverTimezone=GMT%2B8"
+                        driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" >
+
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.importproject.enetity" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格  -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapping" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatsigenerator.dao" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--数据库表-->
+        <table tableName="assertion" domainObjectName="Assertion"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="directory_t" domainObjectName="Directory"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="example_t" domainObjectName="Example"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="file_t" domainObjectName="File"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="interface_t" domainObjectName="Interface"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="method_t" domainObjectName="Method"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="mock_t" domainObjectName="Mock"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="mode_impl_t" domainObjectName="ModeImpl"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="model_abstract_t" domainObjectName="ModeAbstract"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="model_method_t" domainObjectName="ModeMethod"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="model_param_t" domainObjectName="ModeParam"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--数据库表-->
+        <table tableName="project_t" domainObjectName="Project"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+    </context>
+</generatorConfiguration>
