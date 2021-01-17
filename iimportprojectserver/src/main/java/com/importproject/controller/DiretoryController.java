@@ -23,7 +23,6 @@ public class DiretoryController {
      * @return {@link DirectoryDTO}
      * @date 2021/1/16
      */
-     
     @RequestMapping("/queryDirectory")
     public DirectoryDTO queryDirectory(String directoryid){
         return directoryRepositoryInter.queryDirectory(directoryid);
