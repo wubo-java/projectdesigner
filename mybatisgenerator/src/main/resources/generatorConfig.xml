@@ -15,7 +15,7 @@
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.importproject.enetity" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="com.mybatsigenerator.model" targetProject="src\main\java">
             <property name="enableSubPackages" value="true"/>
             <!-- 从数据库返回的值被清理前后的空格  -->
             <property name="trimStrings" value="true" />
