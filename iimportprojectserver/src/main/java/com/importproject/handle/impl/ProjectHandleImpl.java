@@ -1,9 +1,12 @@
 package com.importproject.handle.impl;
 
 import com.importproject.dao.ProjectMapper;
+import com.importproject.dto.ProjectDTO;
 import com.importproject.dto.ZMenuDTO;
+import com.importproject.enetity.Project;
 import com.importproject.handle.inter.ProjectHandleinter;
 import com.importproject.pojo.ProjectPojo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +25,16 @@ public class ProjectHandleImpl implements ProjectHandleinter {
     /**
      * @author wubo
      * @description 根据工程id更新。
-     * @param projectId
+     * @param projectDTO
      * @return
      * @date 2021/1/16
      */
 
     @Override
-    public void updateProjectByProjectId(String projectId) {
-
+    public int updateProjectByProjectId(ProjectDTO projectDTO) {
+        Project project=new Project();
+        BeanUtils.copyProperties(projectDTO,project);
+        return projectMapper.updateByPrimaryKeySelective(project);
     }
 
     /**
@@ -54,7 +59,9 @@ public class ProjectHandleImpl implements ProjectHandleinter {
      * @date 2021/1/16
      */
     @Override
-    public void insertProjectInfo() {
-
+    public int insertProjectInfo(ProjectDTO projectDTO) {
+        Project project=new Project();
+        BeanUtils.copyProperties(projectDTO, project);
+        return projectMapper.insert(project);
     }
 }

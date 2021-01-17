@@ -1,7 +1,11 @@
 package com.importproject.handle.impl;
 
+import com.importproject.dao.FileMapper;
 import com.importproject.dto.FileDTO;
+import com.importproject.enetity.File;
 import com.importproject.handle.inter.FileHandleInter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FileHandleImpl implements FileHandleInter {
+
+    @Autowired
+    FileMapper fileMapper;
     /**
      * @author wubo
      * @description 插入文件信息
@@ -21,20 +28,24 @@ public class FileHandleImpl implements FileHandleInter {
 
     @Override
     public int insertFileInfo(FileDTO fileDTO) {
-        return 0;
+        File file=new File();
+        BeanUtils.copyProperties(fileDTO,file);
+        return fileMapper.insert(file);
     }
 
 
     /**
      * @author wubo
      * @description 根据文件id进行更新
-     * @param fileId
+     * @param fileDTO
      * @return {@link int}
      * @date 2021/1/16
      */
 
     @Override
-    public int updateFileInfoByID(String fileId) {
-        return 0;
+    public int updateFileInfoByID(FileDTO fileDTO) {
+        File file=new File();
+        BeanUtils.copyProperties(fileDTO,file);
+        return fileMapper.updateByPrimaryKeySelective(file);
     }
 }

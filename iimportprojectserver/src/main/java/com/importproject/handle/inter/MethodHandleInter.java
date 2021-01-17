@@ -11,5 +11,5 @@ public interface MethodHandleInter {
 
     public int insertMethodInfo(MethodDTO methodDTO);
 
-    public int updateMethodById(String methodid);
+    public int updateMethodById(MethodDTO methodDTO);
 }

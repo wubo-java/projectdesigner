@@ -11,7 +11,7 @@ public interface FileHandleInter {
 
     public int insertFileInfo(FileDTO fileDTO);
 
-    public int updateFileInfoByID(String fileId);
+    public int updateFileInfoByID(FileDTO fileDTO);
     
 
 }

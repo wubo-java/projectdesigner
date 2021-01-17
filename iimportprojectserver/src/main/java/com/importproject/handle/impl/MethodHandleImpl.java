@@ -1,7 +1,11 @@
 package com.importproject.handle.impl;
 
+import com.importproject.dao.MethodMapper;
 import com.importproject.dto.MethodDTO;
+import com.importproject.enetity.Method;
 import com.importproject.handle.inter.MethodHandleInter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MethodHandleImpl implements MethodHandleInter {
 
+    @Autowired
+    MethodMapper methodMapper;
     /**
      * @author wubo
      * @description 插入方法信息
@@ -22,7 +28,9 @@ public class MethodHandleImpl implements MethodHandleInter {
 
     @Override
     public int insertMethodInfo(MethodDTO methodDTO) {
-        return 0;
+        Method method=new Method();
+        BeanUtils.copyProperties(methodDTO,method);
+        return methodMapper.insert(method);
     }
 
     /**
@@ -34,7 +42,9 @@ public class MethodHandleImpl implements MethodHandleInter {
      */
 
     @Override
-    public int updateMethodById(String methodid) {
-        return 0;
+    public int updateMethodById(MethodDTO methodDTO) {
+        Method method=new Method();
+        BeanUtils.copyProperties(methodDTO,method);
+        return methodMapper.updateByPrimaryKeySelective(method);
     }
 }

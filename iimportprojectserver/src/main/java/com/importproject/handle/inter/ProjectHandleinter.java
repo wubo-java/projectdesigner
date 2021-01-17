@@ -1,5 +1,6 @@
 package com.importproject.handle.inter;
 
+import com.importproject.dto.ProjectDTO;
 import com.importproject.dto.ZMenuDTO;
 import com.importproject.pojo.ProjectPojo;
 
@@ -12,9 +13,9 @@ import java.util.List;
  */
 public interface ProjectHandleinter {
 
-    public void updateProjectByProjectId(String projectId);
+    public int updateProjectByProjectId(ProjectDTO projectDTO);
 
-    public void insertProjectInfo();
+    public int insertProjectInfo(ProjectDTO projectDTO);
 
     public List<ZMenuDTO> copyValue(ProjectPojo projectPojo);
 }

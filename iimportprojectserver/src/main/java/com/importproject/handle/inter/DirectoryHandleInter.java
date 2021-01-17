@@ -11,5 +11,5 @@ public interface DirectoryHandleInter {
 
     public int insertDirectoryInfo(DirectoryDTO directoryDTO);
 
-    public int updateDirectoryInfoById(String directoryId);
+    public int updateDirectoryInfoById(DirectoryDTO directoryDTO);
 }
