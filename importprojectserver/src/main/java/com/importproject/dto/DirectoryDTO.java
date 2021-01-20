@@ -13,13 +13,13 @@ public class DirectoryDTO {
     private Integer directoryid;
     //add by wubo 2021/1/16  项目id
     private Integer project_id;
-    //add by wubo 2021/1/16 项目描述 
+    //add by wubo 2021/1/16 项目描述
     private String directorydesc;
-    //add by wubo 2021/1/16 项目路径 
+    //add by wubo 2021/1/16 项目路径
     private String projectroot_id;
-    //add by wubo 2021/1/16 文件夹名 
+    //add by wubo 2021/1/16 文件夹名
     private String directoryname;
-    //add by wubo 2021/1/16 文件id 
+    //mod by laijinrong 2021/1/20 上一层id
     private  Integer fileid_d_fk;
 
 }
