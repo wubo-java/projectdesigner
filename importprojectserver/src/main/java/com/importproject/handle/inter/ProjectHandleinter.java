@@ -18,4 +18,6 @@ public interface ProjectHandleinter {
     public int insertProjectInfo(ProjectDTO projectDTO);
 
     public List<ZMenuDTO> copyValue(ProjectPojo projectPojo);
+
+    public ProjectDTO readProject(String classpath);
 }

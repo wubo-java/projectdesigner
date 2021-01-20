@@ -3,14 +3,17 @@ package com.importproject.handle.impl;
 import com.importproject.dao.ProjectMapper;
 import com.importproject.dto.*;
 import com.importproject.enetity.Project;
+import com.importproject.handle.inter.DirectoryHandleInter;
 import com.importproject.handle.inter.ProjectHandleinter;
 import com.importproject.pojo.ProjectPojo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author wubo
@@ -22,6 +25,8 @@ public class ProjectHandleImpl implements ProjectHandleinter {
 
     @Autowired
     ProjectMapper projectMapper;
+    @Autowired
+    DirectoryHandleInter directoryHandleInter;
     /**
      * @author wubo
      * @description 根据工程id更新。
@@ -65,6 +70,55 @@ public class ProjectHandleImpl implements ProjectHandleinter {
             //TODO 转换方法信息入zMenuDTO。
         }
       return null;
+    }
+
+    /**
+     *  读取项目最外层文件
+     * @param classpath
+     * //add by laijinrong 2021/1/19
+     */
+    @Override
+    public ProjectDTO readProject(String classpath) {
+        ProjectDTO projectDTO = new ProjectDTO();
+        File project = new File(classpath);
+        Project projectEnetity = new Project();
+
+        if (project.exists()) {
+            //项目信息 add by laijinrong 2021/1/19
+            StringBuffer sb = new StringBuffer();
+            for(int i = 0 ; i < 5 ; i++){
+                sb.append(new Random().nextInt(10));
+            }
+            Integer projectId = Integer.valueOf(sb.toString());//TODO:连接数据库后，id统一从数据库序列取
+            String projectName = project.getName();
+            String projectRoot = project.getAbsolutePath();
+
+            //设置项目DTO  add by laijinrong 2021/1/19
+            projectDTO.setProjectid(projectId);
+            projectDTO.setProjectdesc(projectName);
+            projectDTO.setProjectroot(projectRoot);
+
+            //设置enetity 给文件夹下的对象添加项目信息
+            projectEnetity.setProjectid(projectId);
+            projectEnetity.setProjectdesc(projectName);
+            projectEnetity.setProjectroot(projectRoot);
+
+            //遍历文件路径下的所有文件和文件夹 add by laijinrong 2021/1/19
+            File[] files = project.listFiles();
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    //文件夹操作
+                    directoryHandleInter.readDirectory(file.getAbsolutePath(),projectId,projectEnetity);
+                } else {
+                    //文件操作
+                    System.out.println("文件:" + file.getAbsolutePath());
+                }
+            }
+        } else {
+            System.out.println("文件不存在!");
+        }
+
+        return projectDTO;
     }
 
     /**
