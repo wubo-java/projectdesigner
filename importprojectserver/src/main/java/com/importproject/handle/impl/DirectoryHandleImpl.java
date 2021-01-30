@@ -101,6 +101,9 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
         }
         return directoryDTO;
     }class test2{
+        class test{
+            class testuu{class testyy{}}
+        }
     }
 }
 class t3{}class t4{}
@@ -116,8 +119,26 @@ class t8{ class t9{
 }
 
 
-class t111{class tu{}}
+class
+t111{
+    class tu{}}
 
 
-class  t10{}
+
+class  t10{} class twclass{}class classwq{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -55,7 +55,6 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
                     }
                 }
 
-
                 if(str[i].indexOf("}")>-1){
                     list.add("}");
                     if(isComplete(list)){
@@ -65,7 +64,6 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
                 }
             }
         }
-
         return -1;
 
     }
@@ -226,9 +224,20 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
 
     public void makeClassToFirst(String str,StringBuffer stringBuffers){
         if(classindex(str)!=-1){
-            stringBuffers.append(str.substring(0,str.indexOf("class"))+"\n");
+            //匹配到考虑到的class关键字
+            //把本行能想到的匹配到的格式转换成特定的格式
+            int classIndex = 0 ;
+            if(classindex(str)>0){
+                String s1 =  str.substring(classindex(str));
+                stringBuffers.append(str.substring(0,classindex(str)+s1.indexOf("class"))+"\n");
+                classIndex = classindex(str)+s1.indexOf("class");
+            }else {
+                stringBuffers.append(str.substring(0,classindex(str))+"\n");
+                classIndex=classindex(str);
+            }
             stringBuffers.append("class ");
-            makeClassToFirst(str.substring(str.indexOf("class")+5,str.length()),stringBuffers);
+            //递归本行，考虑到本行有多个class关键字
+            makeClassToFirst(str.substring(5+classIndex,str.length()),stringBuffers);
         }else{
             stringBuffers.append(str+"\n");
         }
@@ -385,18 +394,17 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @return {@link int}
      * @date 2021/1/30
      */
-     
     public int classindex(String orginalstr){
         if(orginalstr.indexOf(" class ")>-1){
-            return orginalstr.indexOf("class");
+            return orginalstr.indexOf(" class ");
         }else if(orginalstr.indexOf("}class")>-1){
-            return orginalstr.indexOf("class");
+            return orginalstr.indexOf("}class");
         }else if(orginalstr.indexOf("class ")==0){
             return orginalstr.indexOf("class");
         }else if(orginalstr.equals("class")){
             return orginalstr.indexOf("class");
         }else if(orginalstr.indexOf("{class")>-1){
-            return orginalstr.indexOf("class");
+            return orginalstr.indexOf("{class");
         }
         return -1;
     }
