@@ -61,21 +61,21 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
 
     /**
      * 对文件夹进行读写操作
-     * @param classpath 绝对磁盘位置
+     * @param path 绝对磁盘位置
      * @param upperId 上一层的id
-     * @param projectEnetity 所属项目对象
+     * @param projectEnetity 所属项目对象classpath
      * @return
      */
     @Override
-    public DirectoryDTO readDirectory(String classpath, Integer upperId, Project projectEnetity) {
-        File directory = new File(classpath);
+    public DirectoryDTO readDirectory(String path, Integer upperId, Project projectEnetity) {
+        File directory = new File(path);
         DirectoryDTO directoryDTO = new DirectoryDTO();
-        if(directory.exists()){
+        if (directory.exists()) {
             StringBuffer sb = new StringBuffer();
-            for(int i = 0 ; i < 5 ; i++){
+            for (int i = 0; i < 5; i++) {
                 sb.append(new Random().nextInt(10));
             }
-            Integer directoryId =  Integer.valueOf(sb.toString());//add by laijinrong 2021/1/19 TODO:连接数据库后，id统一从数据库序列取
+            Integer directoryId = Integer.valueOf(sb.toString());//add by laijinrong 2021/1/19 TODO:连接数据库后，id统一从数据库序列取
             String directorydesc = "文件夹描述";
             String directoryname = directory.getName();
 
@@ -92,13 +92,32 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
             for (File file : files) {
                 if (file.isDirectory()) {
                     //文件夹操作
-                    directoryHandleInter.readDirectory(file.getAbsolutePath(),directoryId,projectEnetity);
+                    directoryHandleInter.readDirectory(file.getAbsolutePath(), directoryId, projectEnetity);
                 } else {
                     //文件操作
-                    fileHandleInter.readFile(file.getAbsolutePath(),directoryId,projectEnetity);
+                    fileHandleInter.readFile(file.getAbsolutePath(), directoryId, projectEnetity);
                 }
             }
         }
         return directoryDTO;
+    }class test2{
     }
 }
+class t3{}class t4{}
+
+class t5{
+    class t6{}} class t7{}
+
+
+class t8{ class t9{
+
+}
+   class t11{}
+}
+
+
+class t111{class tu{}}
+
+
+class  t10{}
+
