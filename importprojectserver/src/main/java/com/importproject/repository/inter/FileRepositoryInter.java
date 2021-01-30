@@ -16,4 +16,5 @@ public interface FileRepositoryInter {
 
 
     public List<FileDTO> queryAllFile();
+
 }

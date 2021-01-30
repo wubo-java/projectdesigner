@@ -40,8 +40,13 @@ public class FtpUtil {
             ftpClient.setControlEncoding("UTF-8"); // 中文支持
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.enterLocalPassiveMode();
+            if(!ftpClient.changeWorkingDirectory(ftpDTO.getFtpPath())){
+                String[] directoryNames=ftpDTO.getFtpPath().split("/");
+                for (String directoryName : directoryNames) {
+                    createDir(ftpClient,directoryName);
+                }
+            }
             ftpClient.changeWorkingDirectory(ftpDTO.getFtpPath());
-
             ftpClient.storeFile(fileName, input);
 
             input.close();
@@ -58,6 +63,16 @@ public class FtpUtil {
             }
         }
         return success;
+    }
+
+    public void createDir(FTPClient ftpClient,String dirname) {
+        try {
+            ftpClient.makeDirectory(dirname);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+
     }
 
     /**
@@ -79,7 +94,6 @@ public class FtpUtil {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.enterLocalPassiveMode();
             ftpClient.changeWorkingDirectory(ftpDTO.getFtpPath());
-
             File localFile = new File(ftpDTO.getLocalPath() + File.separatorChar + fileName);
             OutputStream os = new FileOutputStream(localFile);
             ftpClient.retrieveFile(fileName, os);

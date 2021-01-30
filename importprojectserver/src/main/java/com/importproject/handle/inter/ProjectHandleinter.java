@@ -20,4 +20,6 @@ public interface ProjectHandleinter {
     public List<ZMenuDTO> copyValue(ProjectPojo projectPojo);
 
     public ProjectDTO readProject(String classpath);
+
+    public void AnalyFileToDataBase(String projectRoot,int projectId,int upperFileId);
 }

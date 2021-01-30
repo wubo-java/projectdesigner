@@ -17,4 +17,10 @@ public class MethodDTO {
     private  String methodname;
     //add by wubo 2021/1/16 方法描述
     private  String methoddesc;
+    //add by wubo 2021/1/29 文件id
+    private Integer fileid;
+    //add by wubo 2021/1/29 项目id
+    private String projectidM;
+
+
 }

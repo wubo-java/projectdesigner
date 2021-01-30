@@ -9,9 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Random;
 
 /**
@@ -82,8 +79,7 @@ public class FileHandleImpl implements FileHandleInter {
             fileDTO.setFileid(fileId);
             fileDTO.setFilename(fileName);
             fileDTO.setFiletype(fileType);
-            fileDTO.setProjectid_f(projectEnetity.getProjectid());
-            fileDTO.setMethod_id_fk(upperId);
+            fileDTO.setProjectidF(projectEnetity.getProjectid());
             fileDTO.setProjectroot_f(projectEnetity.getProjectroot());
             //存入数据库
             fileHandleInter.insertFileInfo(fileDTO);

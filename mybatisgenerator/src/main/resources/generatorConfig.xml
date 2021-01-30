@@ -4,8 +4,14 @@
     <!--  <properties resource="mybatis.properties" />
          -->
 <!--    <classPathEntry location="该jar包的位置\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />-->
+
     <context id="msqlTables" targetRuntime="MyBatis3">
+
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
         <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/projectdesigner?serverTimezone=GMT%2B8"
                         driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" >
 
@@ -19,6 +25,7 @@
             <property name="enableSubPackages" value="true"/>
             <!-- 从数据库返回的值被清理前后的空格  -->
             <property name="trimStrings" value="true" />
+
         </javaModelGenerator>
         <sqlMapGenerator targetPackage="mapping" targetProject="src\main\resources">
             <property name="enableSubPackages" value="true"/>
@@ -100,4 +107,7 @@
             <property name="useActualColumnNames" value="false"/>
         </table>
     </context>
+
 </generatorConfiguration>
+
+

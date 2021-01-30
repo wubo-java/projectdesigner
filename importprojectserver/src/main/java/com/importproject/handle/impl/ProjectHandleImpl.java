@@ -121,6 +121,11 @@ public class ProjectHandleImpl implements ProjectHandleinter {
         return projectDTO;
     }
 
+    @Override
+    public void AnalyFileToDataBase(String projectRoot, int projectId,int upperFileId) {
+
+    }
+
     /**
      * @author wubo
      * @description 插入工程信息。

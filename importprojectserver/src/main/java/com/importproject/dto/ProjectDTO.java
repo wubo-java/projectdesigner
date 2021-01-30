@@ -15,4 +15,6 @@ public class ProjectDTO {
     private String projectdesc;
     //add by wubo 2021/1/16 项目路径
     private String projectroot;
+
+
 }

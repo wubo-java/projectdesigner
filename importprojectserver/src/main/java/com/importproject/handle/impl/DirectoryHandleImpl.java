@@ -82,10 +82,8 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
             directoryDTO.setDirectorydesc(directorydesc);
             directoryDTO.setDirectoryid(directoryId);
             directoryDTO.setDirectoryname(directoryname);
-            directoryDTO.setProject_id(projectEnetity.getProjectid());
-            directoryDTO.setProjectroot_id(projectEnetity.getProjectroot());
-            directoryDTO.setFileid_d_fk(upperId);
-
+            directoryDTO.setProjectrootD(projectEnetity.getProjectroot());
+            directoryDTO.setProjectidD(projectEnetity.getProjectid());
             //存入数据库
             directoryHandleInter.insertDirectoryInfo(directoryDTO);
 

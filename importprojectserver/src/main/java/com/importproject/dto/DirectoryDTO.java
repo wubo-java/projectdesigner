@@ -12,14 +12,15 @@ public class DirectoryDTO {
     //add by wubo 2021/1/16 文件夹id
     private Integer directoryid;
     //add by wubo 2021/1/16  项目id
-    private Integer project_id;
+    private Integer projectidD;
     //add by wubo 2021/1/16 项目描述
     private String directorydesc;
     //add by wubo 2021/1/16 项目路径
-    private String projectroot_id;
+    private String projectrootD;
     //add by wubo 2021/1/16 文件夹名
     private String directoryname;
-    //mod by laijinrong 2021/1/20 上一层id
-    private  Integer fileid_d_fk;
+    //add by wubo 2021/1/29 文件夹id外键，父子id
+    private Integer directoryid_fk;
+    
 
 }

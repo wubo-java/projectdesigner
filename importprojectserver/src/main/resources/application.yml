@@ -21,3 +21,6 @@ ftpPath :
 
 localPath :
     E:/frontftp
+
+threadNum :
+   10

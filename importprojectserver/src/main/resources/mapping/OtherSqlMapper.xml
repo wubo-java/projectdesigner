@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.importproject.dao.OtherSqlMapper">
-    <!--实现自增序列-->
-    <select id="querySequence" resultType="int" >
-        SELECT NEXTVAL('TestSeq')
-    </select>
-</mapper>

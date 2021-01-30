@@ -1,9 +1,19 @@
 package com.importproject.service.impl;
 
+import com.importproject.dto.FileDTO;
+import com.importproject.dto.ProjectDTO;
+import com.importproject.handle.inter.ProjectHandleinter;
+import com.importproject.repository.inter.FileRepositoryInter;
 import com.importproject.service.inter.ImportprojectServiceInter;
+import com.importproject.util.FileUtil;
+import com.importproject.util.Thread.FixedThreadUtil;
+import com.importproject.util.Thread.ThreadContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wubo
@@ -12,36 +22,43 @@ import java.io.File;
  */
 @Service
 public class ImportProjectServiceimpl implements ImportprojectServiceInter {
+    @Autowired
+    ProjectHandleinter projectHandleinter;
+
+    @Autowired
+    FileRepositoryInter fileRepositoryInter;
     /**
      * @author wubo
      * @description 插入项目信息
-     * @param projectroot
+     * @param projectRoot
      * @return
      * @date 2021/1/16
      */
 
     @Override
-    public void importProject(String projectroot) {
-        //TODO 读取文件路径插入project表
+    public void importProject(String projectRoot) {
 
-        File projectFile = new File(projectroot);////add by laijinrong 2021/1/19
-        if (projectFile.exists()) {
-            File[] files = projectFile.listFiles();
-            if (null != files) {
-                for (File file:files) {
-                    if (file.isDirectory()) {
-                        //文件夹操作
+        //插入项目表
+        ProjectDTO projectDTO=new ProjectDTO();
+        projectDTO.setProjectroot(projectRoot);
+        int projectId=projectHandleinter.insertProjectInfo(projectDTO);
 
-                    } else {
-                        //文件操作
-                    }
-                }
-            }
+        //插入文件夹表和文件表
+        File file=new File(projectRoot);
+        FileUtil fileUtil=new FileUtil();
+        fileUtil.analyFileToDataBase(file,projectId,-1);
+
+        //拿到所有文件，进行方法分析
+        List<FileDTO> fileDTOList= fileRepositoryInter.queryAllFile();
+        List<String> projectRootList=new ArrayList<>();
+        for (FileDTO fileDTO : fileDTOList) {
+            projectRootList.add(fileDTO.getProjectrootF());
         }
-        //TODO 遍历项目，递归判断，第一次是文件夹，插入文件夹表，并mybatis返回主键，第二次用于第二层遍历同样插入加update，
-        // 达到插入project表，directory表，file表,。
-        //DirectoryHandle,FileHandle,ProjectHandle
-        //TODO,FileRepository获取所有文件
+        FixedThreadUtil fixedThreadUtil=new FixedThreadUtil();
+        ThreadContext threadContext=new ThreadContext(fixedThreadUtil);
+        threadContext.runThread(projectRootList);
        //TODO MethodHandler,根据文件处理方法与文件的对应关系。
     }
+
+
 }
