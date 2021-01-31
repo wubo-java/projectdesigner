@@ -50,15 +50,9 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
     private static void getMethod(String stringBuffer, Map<String, List<String>> methodMap) {
         List<String> list = new ArrayList<>();
         stringBuffer.replaceAll("\n","");//把换行符全部干掉
-        //获取类名
-        String className = getClassName(stringBuffer);
-
-        //获取类名
-
+        String className = getClassName(stringBuffer);//获取类名
         String classBody = stringBuffer.substring(stringBuffer.indexOf("{") + 1,stringBuffer.lastIndexOf("}"));//避开第一个大括号，得到类体
-
         classBody = killMethodBody(classBody);//去掉方法体
-
         list = getMethodOfRight(classBody); //使用“(”来判断方法名
         methodMap.put(className,list);//把类名和方法名填进map中
     }
