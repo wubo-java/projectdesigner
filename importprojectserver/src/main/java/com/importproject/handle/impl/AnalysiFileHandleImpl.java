@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author wubo
@@ -41,6 +42,7 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
     }
 
     /**
+     * //add by laijinrong 2021/1/31
      * 对类stringBuffer进行操作，得到方法名，存入Map
      * @param stringBuffer
      * @param methodMap
@@ -49,23 +51,19 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
         List<String> list = new ArrayList<>();
         stringBuffer.replaceAll("\n","");//把换行符全部干掉
         //获取类名
-        String className = "";
-        String classNameStr = stringBuffer.substring(5,stringBuffer.indexOf("{"));
-        if(classNameStr.indexOf(" extends ") != -1){
-            className = classNameStr.substring(0,classNameStr.indexOf(" extends ")).replaceAll(" ","");
-        }else if(classNameStr.indexOf(" implements ") != -1){
-            className = classNameStr.substring(0,classNameStr.indexOf(" implements ")).replaceAll(" ","");
-        }else {
-            className = classNameStr.replaceAll(" ","");
-        }
-        //避开第一个大括号，得到类体
-        String classBody = stringBuffer.substring(stringBuffer.indexOf("{") + 1,stringBuffer.lastIndexOf("}"));
-        //去掉方法体
-        classBody = killMethodBody(classBody);
-        //使用“(”来判断方法名
-        list = getMethodOfRight(classBody);
-        methodMap.put(className,list);
+        String className = getClassName(stringBuffer);
+
+        //获取类名
+
+        String classBody = stringBuffer.substring(stringBuffer.indexOf("{") + 1,stringBuffer.lastIndexOf("}"));//避开第一个大括号，得到类体
+
+        classBody = killMethodBody(classBody);//去掉方法体
+
+        list = getMethodOfRight(classBody); //使用“(”来判断方法名
+        methodMap.put(className,list);//把类名和方法名填进map中
     }
+
+
 
     /**
      *
@@ -456,7 +454,7 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
     /**
      * @param classBody
      * //add by laijinrong 2021/1/31
-     * @return 
+     * @return
      */
     public static String killMethodBody(String classBody){
         if(classBody.indexOf("{")==-1){
@@ -482,6 +480,24 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
             }
         }
         return classBody;
+    }
+
+    /**
+     * 类名的判断条件
+     * //add by laijinrong 2021/1/31
+     * @param stringBuffer
+     * @return
+     */
+    private static String getClassName(String stringBuffer) {
+        String classNameStr = stringBuffer.substring(5,stringBuffer.indexOf("{"));
+
+        if(classNameStr.indexOf(" extends ") != -1){
+            return classNameStr.substring(0,classNameStr.indexOf(" extends ")).replaceAll(" ","");
+        }else if(classNameStr.indexOf(" implements ") != -1){
+            return classNameStr.substring(0,classNameStr.indexOf(" implements ")).replaceAll(" ","");
+        }else {
+            return classNameStr.replaceAll(" ","");
+        }
     }
 }
 
