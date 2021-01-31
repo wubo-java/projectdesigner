@@ -21,12 +21,9 @@ import java.util.Random;
 @Service
 public class DirectoryHandleImpl implements DirectoryHandleInter {
 
-    @Autowired
-    DirectoryMapper directoryMapper;
-    @Autowired
-    DirectoryHandleInter directoryHandleInter;
-    @Autowired
-    FileHandleInter fileHandleInter;
+    @Autowired DirectoryMapper directoryMapper;
+    @Autowired DirectoryHandleInter directoryHandleInter;
+    @Autowired FileHandleInter fileHandleInter;
 
     /**
      * @param directoryDTO
@@ -125,7 +122,8 @@ t111{
 
 
 
-class  t10{} class twclass{}class classwq{}
+class
+t10{} class twclass{}class classwq{}
 
 
 

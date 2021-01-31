@@ -19,6 +19,11 @@ public interface ProjectHandleinter {
 
     public List<ZMenuDTO> copyValue(ProjectPojo projectPojo);
 
+    /**
+     *  读取项目最外层文件
+     * @param classpath
+     * //add by laijinrong 2021/1/19
+     */
     public ProjectDTO readProject(String classpath);
 
     public void AnalyFileToDataBase(String projectRoot,int projectId,int upperFileId);
