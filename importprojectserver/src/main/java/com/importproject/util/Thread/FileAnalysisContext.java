@@ -16,6 +16,6 @@ public class FileAnalysisContext implements Runnable{
     }
     @Override
     public void run() {
-        analysisFileHandleInter.analysisMethod(this.projectRoot);
+        analysisFileHandleInter.analysisClass(this.projectRoot);
     }
 }

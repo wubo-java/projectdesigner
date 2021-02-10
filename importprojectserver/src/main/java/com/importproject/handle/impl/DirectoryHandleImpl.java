@@ -21,12 +21,10 @@ import java.util.Random;
 @Service
 public class DirectoryHandleImpl implements DirectoryHandleInter {
 
-    @Autowired
-    DirectoryMapper directoryMapper;
-    @Autowired
-    DirectoryHandleInter directoryHandleInter;
-    @Autowired
-    FileHandleInter fileHandleInter;
+    @Autowired DirectoryMapper directoryMapper;
+    @Autowired DirectoryHandleInter directoryHandleInter;
+    @Autowired FileHandleInter fileHandleInter;
+
 
     /**
      * @param directoryDTO
@@ -37,7 +35,7 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
      */
 
     @Override
-    public int insertDirectoryInfo(DirectoryDTO directoryDTO) {
+    public int insertDirectoryInfo (DirectoryDTO directoryDTO) {
         Directory directory = new Directory();
         BeanUtils.copyProperties(directoryDTO, directory);
         return directoryMapper.insert(directory);
@@ -58,6 +56,8 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
         directoryMapper.updateByPrimaryKeySelective(directory);
         return 0;
     }
+
+
 
     /**
      * 对文件夹进行读写操作
@@ -102,7 +102,14 @@ public class DirectoryHandleImpl implements DirectoryHandleInter {
         return directoryDTO;
     }class test2{
         class test{
-            class testuu{class testyy{}}
+            class testuu{class testyy{
+                void s
+                        (
+
+                        ){
+
+                }
+            }}
         }
     }
 }
@@ -125,7 +132,8 @@ t111{
 
 
 
-class  t10{} class twclass{}class classwq{}
+class
+t10{} class twclass{}class classwq{}
 
 
 

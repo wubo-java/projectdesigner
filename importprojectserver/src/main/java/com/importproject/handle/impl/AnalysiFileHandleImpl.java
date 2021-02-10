@@ -33,7 +33,7 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
 
     /**
      * @author wubo
-     * @description 
+     * @description
      * @param flag
      * @param str
      * @return {@link int}
@@ -58,7 +58,9 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
                 if(str[i].indexOf("}")>-1){
                     list.add("}");
                     if(isComplete(list)){
-                        System.out.println(stringBuffer.toString());
+//                        System.out.println(stringBuffer.toString());
+                        String braceStr=removeFirstAndLastBrace(stringBuffer.toString());
+                        removeMethodBodyContent(braceStr.split("\n"));
                         return i;
                     }
                 }
@@ -71,22 +73,12 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @author wubo
      * @description 分析class
      * @param fileRoot
-     * @return 
+     * @return
      * @date 2021/1/30
      */
-     
+
     @Override
     public void analysisClass(String fileRoot) {
-//        try {
-//
-//            File file = new File(fileRoot);
-//            removeComments(file);
-//            FileReader fr = new FileReader(file);
-//            BufferedReader br = new BufferedReader(fr);
-//            analysisFileProcess(br, "");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         File file=new File(fileRoot);
         String str=removeComments(file);
         String[] strs=str.split("\n");
@@ -99,10 +91,10 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @author wubo
      * @description 分析方法
      * @param fileRoot
-     * @return 
+     * @return
      * @date 2021/1/30
      */
-     
+
     @Override
     public void analysisMethod(String fileRoot) {
         analysisClass(fileRoot);
@@ -112,10 +104,10 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @description 将右括号成为一行
      * @param str
      * @param stringBuffers
-     * @return 
+     * @return
      * @date 2021/1/30
      */
-     
+
     public void makeRightLineFeed(String str,StringBuffer stringBuffers){
         if(str.indexOf("}")!=-1){
             stringBuffers.append(str.substring(0,str.indexOf("}")+1)+"\n");
@@ -134,23 +126,23 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @date 2021/1/30
      */
 
-   public String changeLine(String[] str){
+    public String changeLine(String[] str){
         StringBuffer stringBuffer=new StringBuffer();
-       for (int i = 0; i < str.length; i++) {
-           makeRightLineFeed(str[i],stringBuffer);
-       }
-       return stringBuffer.toString();
-   }
+        for (int i = 0; i < str.length; i++) {
+            makeRightLineFeed(str[i],stringBuffer);
+        }
+        return stringBuffer.toString();
+    }
 
 
-   /**
-    * @author wubo
-    * @description 将class 的第一个左括号之后的代码全部换行。
-    * @param str
-    * @return {@link java.lang.String}
-    * @date 2021/1/30
-    */
-    
+    /**
+     * @author wubo
+     * @description 将class 的第一个左括号之后的代码全部换行。
+     * @param str
+     * @return {@link java.lang.String}
+     * @date 2021/1/30
+     */
+
     public String makeFirstLeftLineFeed(String[] str){
         StringBuffer stringBuffer=new StringBuffer();
         for (int i = 0; i < str.length; i++) {
@@ -173,10 +165,10 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @author wubo
      * @description 移除注释，并将class置于行首。
      * @param file
-     * @return 
+     * @return
      * @date 2021/1/30
      */
-     
+
     public String removeComments(File file) {
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
@@ -194,9 +186,9 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
 
             String[] strings=str.split("\n");
             for (String string : strings) {
-               makeClassToFirst(string,stringBuffers);
+                makeClassToFirst(string,stringBuffers);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -218,7 +210,7 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @description 将class关键字定位到头部
      * @param str
      * @param stringBuffers
-     * @return 
+     * @return
      * @date 2021/1/30
      */
 
@@ -349,7 +341,7 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
      * @return {@link boolean}
      * @date 2021/1/30
      */
-     
+
     public boolean isComplete(List<String> list) {
         int left = 0;
         int right = 0;
@@ -408,9 +400,80 @@ public class AnalysiFileHandleImpl implements AnalysisFileHandleInter {
         }
         return -1;
     }
-}
- 
 
-    
+
+    /**
+     * @author wubo
+     * @description 移除第一个括号和最后一个括号。
+     * @param str
+     * @return {@link java.lang.String}
+     * @date 2021/2/10
+     */
+     
+    public String removeFirstAndLastBrace(String str){
+        str=str.substring(str.indexOf("{")+1,str.length());
+        str=str.substring(0,str.lastIndexOf("}"));
+        return str;
+    }
+
+
+    public String removeMethodBodyContent(String[] str){
+        List list=new ArrayList();
+        int count=0;
+        StringBuffer stringBuffer=new StringBuffer();
+        for (int i = 0; i < str.length; i++) {
+
+
+                if(str[i].indexOf("{")>-1){
+                    if(count==0){
+                        stringBuffer.append(str[i].substring(0,str[i].indexOf("{")==0?1:str[i].indexOf("{")));
+                    }
+                    count=-1;
+                    for (int j = 0; j < cacluteCount(str[i],'{'); j++) {
+                        list.add("{");
+                    }
+                }
+
+                if(count==0){
+                    stringBuffer.append(str[i]);
+                }
+
+                if(str[i].indexOf("}")>-1){
+                    for (int j = 0; j < cacluteCount(str[i],'}'); j++) {
+                        list.add("}");
+                    }
+                    if(isComplete(list)){
+                        String s=stringBuffer.toString();
+                        s=s.substring(0,s.lastIndexOf("("));
+                        s=s.replaceAll("\\s+$","");
+                        char[] chars=s.toCharArray();
+                        char[] newChars=new char[chars.length];
+                        for(int m=chars.length-1;m>=0;m--){
+                            if(chars[m]!=' '){
+                                newChars[m]=chars[m];
+                            }else{
+                                break;
+                            }
+                        }
+                        System.out.println(String.valueOf(newChars));
+
+                        stringBuffer=new StringBuffer();
+                        list=new ArrayList();
+                        count=0;
+                    }
+                }
+
+        }
+
+
+        return  null;
+    }
+
+
+
+}
+
+
+
 
 
